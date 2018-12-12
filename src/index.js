@@ -1,4 +1,4 @@
-import { Animated, Easing } from 'react-native';
+import { Animated, Easing } from "react-native";
 
 export function fromLeft(duration = 300) {
   return {
@@ -6,7 +6,7 @@ export function fromLeft(duration = 300) {
       duration,
       easing: Easing.out(Easing.poly(4)),
       timing: Animated.timing,
-      useNativeDriver: true,
+      useNativeDriver: true
     },
     screenInterpolator: ({ layout, position, scene }) => {
       const { index } = scene;
@@ -14,16 +14,43 @@ export function fromLeft(duration = 300) {
 
       const translateX = position.interpolate({
         inputRange: [index - 1, index, index + 1],
-        outputRange: [-initWidth, 0, 0],
+        outputRange: [-initWidth, 0, 0]
       });
 
       const opacity = position.interpolate({
-          inputRange: [index - 1, index - 0.99, index],
-          outputRange: [0, 1, 1],
-        });
+        inputRange: [index - 1, index - 0.99, index],
+        outputRange: [0, 1, 1]
+      });
 
       return { opacity, transform: [{ translateX }] };
+    }
+  };
+}
+
+export function fromRight(duration = 300) {
+  return {
+    transitionSpec: {
+      duration,
+      easing: Easing.out(Easing.poly(4)),
+      timing: Animated.timing,
+      useNativeDriver: true
     },
+    screenInterpolator: ({ layout, position, scene }) => {
+      const { index } = scene;
+      const { initWidth } = layout;
+
+      const translateX = position.interpolate({
+        inputRange: [index - 1, index, index + 1],
+        outputRange: [initWidth, 0, 0]
+      });
+
+      const opacity = position.interpolate({
+        inputRange: [index - 1, index - 0.99, index],
+        outputRange: [0, 1, 1]
+      });
+
+      return { opacity, transform: [{ translateX }] };
+    }
   };
 }
 
@@ -33,7 +60,7 @@ export function fromTop(duration = 300) {
       duration,
       easing: Easing.out(Easing.poly(4)),
       timing: Animated.timing,
-      useNativeDriver: true,
+      useNativeDriver: true
     },
     screenInterpolator: ({ layout, position, scene }) => {
       const { index } = scene;
@@ -41,16 +68,16 @@ export function fromTop(duration = 300) {
 
       const translateY = position.interpolate({
         inputRange: [index - 1, index, index + 1],
-        outputRange: [-initHeight, 0, 0],
+        outputRange: [-initHeight, 0, 0]
       });
 
       const opacity = position.interpolate({
-          inputRange: [index - 1, index - 0.99, index],
-          outputRange: [0, 1, 1],
-        });
+        inputRange: [index - 1, index - 0.99, index],
+        outputRange: [0, 1, 1]
+      });
 
       return { opacity, transform: [{ translateY }] };
-    },
+    }
   };
 }
 
@@ -60,18 +87,18 @@ export function fadeIn(duration = 300) {
       duration,
       easing: Easing.out(Easing.poly(4)),
       timing: Animated.timing,
-      useNativeDriver: true,
+      useNativeDriver: true
     },
     screenInterpolator: ({ position, scene }) => {
       const { index } = scene;
 
       const opacity = position.interpolate({
         inputRange: [index - 1, index],
-        outputRange: [0, 1],
+        outputRange: [0, 1]
       });
 
       return { opacity };
-    },
+    }
   };
 }
 
@@ -81,18 +108,18 @@ export function zoomIn(duration = 300) {
       duration,
       easing: Easing.out(Easing.poly(4)),
       timing: Animated.timing,
-      useNativeDriver: true,
+      useNativeDriver: true
     },
     screenInterpolator: ({ position, scene }) => {
       const { index } = scene;
 
       const scale = position.interpolate({
         inputRange: [index - 1, index],
-        outputRange: [0, 1],
+        outputRange: [0, 1]
       });
 
       return { transform: [{ scale }] };
-    },
+    }
   };
 }
 
@@ -102,18 +129,18 @@ export function zoomOut(duration = 300) {
       duration,
       easing: Easing.out(Easing.poly(4)),
       timing: Animated.timing,
-      useNativeDriver: true,
+      useNativeDriver: true
     },
     screenInterpolator: ({ position, scene }) => {
       const { index } = scene;
 
       const scale = position.interpolate({
         inputRange: [index - 1, index],
-        outputRange: [10, 1],
+        outputRange: [10, 1]
       });
 
       return { transform: [{ scale }] };
-    },
+    }
   };
 }
 
@@ -123,18 +150,18 @@ export function flipY(duration = 300) {
       duration,
       easing: Easing.out(Easing.poly(4)),
       timing: Animated.timing,
-      useNativeDriver: true,
+      useNativeDriver: true
     },
     screenInterpolator: ({ position, scene }) => {
       const { index } = scene;
 
       const rotateY = position.interpolate({
         inputRange: [index - 1, index],
-        outputRange: ['180deg', '0deg'],
+        outputRange: ["180deg", "0deg"]
       });
 
-      return { transform: [{ rotateY }], backfaceVisibility: 'hidden' };
-    },
+      return { transform: [{ rotateY }], backfaceVisibility: "hidden" };
+    }
   };
 }
 
@@ -144,17 +171,17 @@ export function flipX(duration = 300) {
       duration,
       easing: Easing.out(Easing.poly(4)),
       timing: Animated.timing,
-      useNativeDriver: true,
+      useNativeDriver: true
     },
     screenInterpolator: ({ position, scene }) => {
       const { index } = scene;
 
       const rotateX = position.interpolate({
         inputRange: [index - 1, index],
-        outputRange: ['180deg', '0deg'],
+        outputRange: ["180deg", "0deg"]
       });
 
-      return { transform: [{ rotateX }], backfaceVisibility: 'hidden' };
-    },
+      return { transform: [{ rotateX }], backfaceVisibility: "hidden" };
+    }
   };
 }
